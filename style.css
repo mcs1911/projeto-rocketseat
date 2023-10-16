@@ -41,9 +41,10 @@ body * {
   color: var(--text-color);
 }
 #container {
-  width: 360px;
+  width: 100%;
   /* height: 712px;
   Altura não precisa colocar no CSS, tem que ser fluida*/
+  max-width: 588px;
   margin: 56px auto 0px;
   padding: 0 24px;
   /* quando se coloca 0 e 24px significa 0 em cima e embaixo e 24px nas laterais*/
