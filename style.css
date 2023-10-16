@@ -1,0 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* esse *{} esta resetando o CSS programado da pagina, algumas coisas padrão*/
+
+:root {
+  --text-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.1);
+  --surface-color-hover: rgba(255, 255, 255, 0.05);
+  --highlight-color: rgba(255, 255, 255, 0.2);
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+body {
+  /*
+  background-image: url(./assets/bg-mobile.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  */
+
+  /*background: color image repeat position/size */
+  background: var(--bg-url) no-repeat top center/cover;
+  /* atalho ou shortcut - Todas as infos agrupadas numa linha */
+}
+body * {
+  font-family: "Inter", sans-serif;
+  /* quando se escreve body e * significa que é universal, vai pegar todo o elemento*/
+  color: var(--text-color);
+}
+#container {
+  width: 360px;
+  /* height: 712px;
+  Altura não precisa colocar no CSS, tem que ser fluida*/
+  margin: 56px auto 0px;
+  padding: 0 24px;
+  /* quando se coloca 0 e 24px significa 0 em cima e embaixo e 24px nas laterais*/
+  /* ilustrativo para entender e visualizar o esquema de caixas border: 1px solid white;*/
+  /*
+  margin: auto;
+  /* margin-left e margin-right pode ser subs por margin. Mas o CSS nao faz a margem superior automaticamente*/
+  /*
+  padding-top: 56px;
+  /*poderia colocar margin-top que tb funcionaria
+  poderia agrupar as margens como um relogio tb, começando por top right bottom left margin: 56px auto 0px*/
+}
+/*Profile*/
+#profile {
+  text-align: center;
+  padding: 24px;
+}
+#profile img {
+  display: block;
+  /* pra poder usar o margin e centralizar a img
+  dá pra fazer por outro comando que é o de text-align:center, teria que abrir outro #profile (pai) antes do tamanho da imagem e colocar o comando text-align*/
+  width: 112px;
+  margin: auto;
+}
+#profile p {
+  font-weight: 500;
+  line-height: 24px;
+  margin: 8px;
+  /*fonte-size padrão da net é 16px, logo não precisa colocar*/
+}
+/*h1*/
+h1 {
+  color: var(--text-color);
+  text-align: center;
+}
+/* switch */
+#switch {
+  position: relative;
+  width: 64px;
+  margin: 4px auto;
+}
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+
+  position: absolute;
+  /* o position absolute sobrepõe os elementos e com o z-index atribui-se camadas*/
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+.light #switch button{
+  right: 0;
+  left: initial;
+}
+#switch span{
+  display: block;
+  /* o span tem como default o display inline que não aceita determinadas propriedades que precisamos empregar*/
+  width: 64px;
+  height: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+
+}
+/*
+<div></div> é um elemento block 
+img <a></a> é um elemento inline e em elemento inline não se aplica a margin auto
+*/
+/* NO HTML existe um <ul> pra uma lista desordenada e a referencia deveria ser um link, levando a alguma URL, como no exemplo não vamos usar nenhum coloca-se uma # 
+se fosse uma <ol> lista ordenada ele colocaria em ordem numérica 
+<ul> fica em bullets points */
+/* quando eu coloco um link do estilo <a href e eu nao quero que a pessoa saia da pagina e que sim abra uma nova aba é só adicionar o target="_blank"*/
+ul {
+  list-style: none;
+  /* para tirar os bullets points*/
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /*o ul é o pai do ul li a, então tudo que for aplicado no pai será obedecido pelo filho também*/
+  padding: 24px;
+}
+ul li a {
+  border: 1px solid var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* se quisesse colocar altura de caixa height: 52px;*/
+  padding: 16px 24px;
+  background: var(--surface-color);
+  /* rgba - red green blue alfa (alfa é a transparência)*/
+  border: 1px solid var(--stroke-color);
+  border-radius: 8px;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  /* Pra descobrir se posso usar uma propriedade https://caniuse.com  esse backdrop-filter tinha limitações, logo no canIuse se descobre o que precisa ser feito pra ser aceito pelos browsers no caso é adicionando o -webkit */
+  text-decoration: none;
+  /* da pra colocar linha embaixo, em cima, no meio ou nenhuma*/
+  font-weight: 500;
+  /* acima de 400 é a fonte bold, como nesse pacote trouxemos 400 e 500 a normal seria 400 e a bold seria 500*/
+  transition: background 0.2s;
+  /*pra deixar a operaçao hover uma pouco mais suave utiliza-se a transição*/
+}
+
+/*pseudo-selector aplica as propriedades quando passar o mouse em cima*/
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--text-color);
+}
+#social-links {
+  display: flex;
+  font-size: 24px;
+  justify-content: center;
+  padding: 24px 0;
+}
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background 0.2s;
+  border-radius: 50%;
+  /* essa borda de 50% é um círculo perfeito*/
+}
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+footer {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+}
